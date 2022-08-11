@@ -27,9 +27,14 @@ def main(args):
     # Load the input artifact to pandas df
     input_df = pd.read_csv(input_artifact_local_path)
 
+    # Drop data that are not within defined geolocation
+    geo_idx = input_df['longitude'].between(
+        -74.25, -73.50) & input_df['latitude'].between(40.5, 41.2)
+    geo_df = input_df[geo_idx].copy()
+
     # Drop outliers for price
-    prep_price_idx = input_df["price"].between(args.min_price, args.max_price)
-    prep_price_df = input_df[prep_price_idx].copy()
+    prep_price_idx = geo_df["price"].between(args.min_price, args.max_price)
+    prep_price_df = geo_df[prep_price_idx].copy()
 
     # Drop outliers for minimum_nights
     prep_minimum_nights_idx = prep_price_df["minimum_nights"].between(
