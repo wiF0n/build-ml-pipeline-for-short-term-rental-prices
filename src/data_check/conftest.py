@@ -1,9 +1,15 @@
+"""
+Define new command line arguments and fixtures for testing
+"""
 import pytest
 import pandas as pd
 import wandb
 
 
 def pytest_addoption(parser):
+    """
+    Add command line arguments
+    """
     parser.addoption("--csv", action="store")
     parser.addoption("--ref", action="store")
     parser.addoption("--kl_threshold", action="store")
@@ -13,6 +19,9 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope='session')
 def data(request):
+    """
+    Fixture for data that are being currently tested
+    """
     run = wandb.init(job_type="data_tests", resume=True)
 
     # Download input artifact. This will also note that this script is using this
@@ -29,6 +38,9 @@ def data(request):
 
 @pytest.fixture(scope='session')
 def ref_data(request):
+    """
+    Fixture for reference data
+    """
     run = wandb.init(job_type="data_tests", resume=True)
 
     # Download input artifact. This will also note that this script is using this
@@ -45,6 +57,9 @@ def ref_data(request):
 
 @pytest.fixture(scope='session')
 def kl_threshold(request):
+    """
+    KL threshold for testing
+    """
     kl_threshold = request.config.option.kl_threshold
 
     if kl_threshold is None:
@@ -52,8 +67,12 @@ def kl_threshold(request):
 
     return float(kl_threshold)
 
+
 @pytest.fixture(scope='session')
 def min_price(request):
+    """
+    Minimum price per night
+    """
     min_price = request.config.option.min_price
 
     if min_price is None:
@@ -61,8 +80,12 @@ def min_price(request):
 
     return float(min_price)
 
+
 @pytest.fixture(scope='session')
 def max_price(request):
+    """
+    Maximum price per night
+    """
     max_price = request.config.option.max_price
 
     if max_price is None:
