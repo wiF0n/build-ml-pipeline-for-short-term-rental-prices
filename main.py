@@ -32,9 +32,6 @@ def main(config: DictConfig):
     steps_par = config['main']['steps']
     active_steps = steps_par.split(",") if steps_par != "all" else _steps
 
-    # Get original cwd for hydra
-    original_cwd = hydra.utils.get_original_cwd()
-
     # Move to a temporary directory
     with tempfile.TemporaryDirectory() as tmp_dir:
 
@@ -53,7 +50,8 @@ def main(config: DictConfig):
 
         if "basic_cleaning" in active_steps:
             # Perform basic cleaning
-            _ = mlflow.run(os.path.join(original_cwd, "src", "basic_cleaning"),
+            _ = mlflow.run(os.path.join(hydra.utils.get_original_cwd(), "src",
+                                        "basic_cleaning"),
                            "main",
                            parameters={
                                "input_artifact":
@@ -75,7 +73,8 @@ def main(config: DictConfig):
                            })
 
         if "data_check" in active_steps:
-            _ = mlflow.run(os.path.join(original_cwd, "src", "data_check"),
+            _ = mlflow.run(os.path.join(hydra.utils.get_original_cwd(), "src",
+                                        "data_check"),
                            "main",
                            parameters={
                                "csv": "clean_sample.csv:latest",
@@ -108,7 +107,7 @@ def main(config: DictConfig):
             # NOTE: use the rf_config we just created as the rf_config parameter for the train_random_forest
             # step
 
-            _ = mlflow.run(os.path.join(original_cwd, "src",
+            _ = mlflow.run(os.path.join(hydra.utils.get_original_cwd(), "src",
                                         "train_random_forest"),
                            "main",
                            parameters={
