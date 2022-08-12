@@ -1,3 +1,6 @@
+"""
+This is the main script for pipeline
+"""
 import json
 
 import mlflow
@@ -23,7 +26,9 @@ _steps = [
 # This automatically reads in the configuration
 @hydra.main(config_name='config')
 def main(config: DictConfig):
-
+    """
+    Main function for running the parts of or whole pipeline
+    """
     # Setup the wandb experiment. All runs will be grouped under this name
     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
