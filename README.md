@@ -570,5 +570,6 @@ you have trained your new model on the new data.
 
 ## Submission links
 
-[W&B](https://wandb.ai/wif0n/nyc_airbnb?workspace=user-wif0n)
+[W&B](https://wandb.ai/wif0n/nyc_airbnb?workspace=user-wif0n)  
+[GitHub](https://github.com/wiF0n/build-ml-pipeline-for-short-term-rental-prices)  
 [GitHub Release](https://github.com/wiF0n/build-ml-pipeline-for-short-term-rental-prices/releases/tag/v1.1.0)
