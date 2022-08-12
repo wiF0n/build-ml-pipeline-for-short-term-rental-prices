@@ -11,31 +11,31 @@ entry_points:
 
       output_artifact:
         description: Output (cleaned) dataset name
-        type: str
+        type: string
 
       output_type:
         description: Type of the output artifact (dataset)
-        type: str
+        type: string
 
       output_description:
         description: Description of the output artifact (dataset)
-        type: str
+        type: string
 
       min_price:
         description: Minimum price for one night (in $)
-        type: str
+        type: float
 
       max_price:
         description: Maximum price for one night (in $)
-        type: str
+        type: float
 
       min_minimum_nights:
         description: Minimum of minimum nights of stay
-        type: str
+        type: float
 
       max_minimum_nights:
         description: Maximum of minimum nights of stay
-        type: str
+        type: float
 
 
     command: >-
