@@ -7,7 +7,7 @@ entry_points:
 
       input_artifact:
         description: Input dataset name from W&B
-        type: str
+        type: string
 
       output_artifact:
         description: Output (cleaned) dataset name
